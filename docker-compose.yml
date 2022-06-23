@@ -13,12 +13,12 @@ services:
         volumes:
             - ./:/var/www
         depends_on:
-            -  redis
+            - redis
         networks:
-            - l aravel-9
+            - laravel-9
 
     # nginx
-    n    ginx:
+    nginx:
         container_name: especializati-nginx
         image: nginx:alpine
         restart: unless-stopped
@@ -30,25 +30,25 @@ services:
         networks:
             - laravel-9
 
-     # db mysql
+    # db mysql
     mysql:
         container_name: especializati-mysql
         image: mysql:5.7.22
         restart: unless-stopped
         environment:
-            MYSQL_DATABASE: ${DB_DAT ABASE}
+            MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
             MYSQL_PASSWORD: ${DB_PASSWORD}
             MYSQL_USER: ${DB_USERNAME}
         volumes:
-            - ./.docker/mysql/dbdata:/var /lib/mysql
+            - ./.docker/mysql/dbdata:/var/lib/mysql
         ports:
             - "3388:3306"
         networks:
             - laravel-9
 
     # queue
-    queu e:
+    queue:
         container_name: especializati-queue
         image: especializati/laravel9-app
         restart: unless-stopped
@@ -59,15 +59,15 @@ services:
             - redis
             - app
         networks:
-             - laravel-9
+            - laravel-9
 
     # redis
     redis:
-        con tainer_name: especializati-redis
+        container_name: especializati-redis
         image: redis:latest
         networks:
             - laravel-9
 
 networks:
     laravel-9:
-        driver:  bridge
+        driver: bridge
