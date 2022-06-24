@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
     # image project
-    deploy_laravel:
+    app:
         container_name: especializati-laravel-9
         build:
             context: .
@@ -57,7 +57,7 @@ services:
             - ./:/var/www
         depends_on:
             - redis
-            - deploy_laravel
+            - app
         networks:
             - laravel-9
 
